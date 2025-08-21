@@ -1,80 +1,79 @@
-*{box-sizing:border-box}
-:root{
-  --bg:#0b1020;
-  --panel:#121936;
-  --text:#e8ecff;
-  --muted:#9aa4d4;
-  --accent:#5b8cff;
-  --accent-2:#23c483;
-  --danger:#ff5468;
-  --outline:#2b376b;
-  --shadow: 0 10px 30px rgba(0,0,0,.25);
-}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
-  background: radial-gradient(1000px 500px at 10% -10%, #1a2555 0%, transparent 70%) , var(--bg);
-  color:var(--text);
-}
-.app-header{
-  display:flex; align-items:center; justify-content:space-between;
-  padding:24px clamp(16px,5vw,48px);
-}
-.app-header h1{margin:0; letter-spacing:.5px}
-.meta{display:flex; gap:16px; align-items:center}
-.team-score{
-  padding:8px 12px; background:var(--panel); border:1px solid var(--outline);
-  border-radius:12px; font-weight:700; box-shadow:var(--shadow);
-}
-.overs{color:var(--muted)}
+/* styles.css — simple, clean look */
 
-.container{
-  padding:0 clamp(16px,5vw,48px) 48px;
-  display:grid; grid-template-columns: 1fr; gap:24px;
-}
-.players{
-  display:grid; gap:16px;
-  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
-}
-.player-card{
-  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-  border:1px solid var(--outline);
-  border-radius:20px; padding:16px 16px 12px; box-shadow:var(--shadow);
-}
-.player-card h2{margin:4px 0 8px; display:flex; gap:8px; align-items:center}
-.strike-indicator{display:inline-block; min-width:1ch; color:var(--accent-2); font-weight:900}
-.player-card.active{outline:2px solid var(--accent-2);}
-.stat{display:flex; justify-content:space-between; color:var(--muted); padding:6px 0; border-bottom:1px dashed rgba(255,255,255,.06)}
-.stat:last-child{border-bottom:none}
+* { box-sizing: border-box; }
 
-.controls{
-  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-  border:1px solid var(--outline);
-  border-radius:20px; padding:16px; box-shadow:var(--shadow);
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #f0f4f9;
+  margin: 0;
+  padding: 20px;
+  color: #1a2b4c;
 }
-.controls h3{margin:0 0 12px}
-.grid{
-  display:grid; gap:10px;
-  grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
-}
-.btn{
-  appearance:none; border:none; cursor:pointer;
-  background:var(--accent); color:white; padding:12px 14px; border-radius:14px;
-  font-weight:700; transition: transform .05s ease, box-shadow .2s ease, filter .2s ease;
-  box-shadow: 0 6px 16px rgba(91,140,255,.35);
-}
-.btn:hover{filter:brightness(1.05)}
-.btn:active{transform: translateY(1px)}
-.btn.danger{background:var(--danger); box-shadow: 0 6px 16px rgba(255,84,104,.35)}
-.btn.special{background:linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%)}
-.btn.outline{
-  background:transparent; color:var(--text);
-  border:1px solid var(--outline); box-shadow:none;
-}
-.toolbar{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap}
 
-.footer{padding:24px; text-align:center; color:var(--muted)}
-@media (min-width: 900px){
-  .container{grid-template-columns: 1.1fr .9fr;}
+h1 {
+  margin: 0 0 14px;
+  color: #1a3a7a;
+}
+
+.scoreboard {
+  background: #ffffff;
+  padding: 16px;
+  margin: 10px auto 18px;
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.scoreboard p {
+  margin: 6px 0;
+}
+
+.players {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 10px 0 20px;
+}
+
+.player {
+  background: #ffffff;
+  padding: 14px 16px;
+  border-radius: 10px;
+  width: 200px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  text-align: left;
+}
+
+.player h3 {
+  margin: 0 0 8px;
+  color: #153a70;
+}
+
+.player p {
+  margin: 6px 0;
+}
+
+.controls {
+  margin-top: 10px;
+}
+
+button {
+  margin: 6px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #1a73e8;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover { background: #1558b0; }
+button:active { transform: translateY(1px); }
+
+@media (max-width: 480px) {
+  .scoreboard { width: 95%; }
+  .player { width: 90%; }
 }
