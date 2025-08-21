@@ -1,71 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Cricket Scoreboard</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header class="app-header">
-      <h1>Cricket Scoreboard</h1>
-      <div class="meta">
-        <span id="team-score" class="team-score">0/0</span>
-        <span id="overs" class="overs">0.0 Overs</span>
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <title>Cricket Scoreboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Cricket Scoreboard</h1>
 
-    <main class="container">
-      <section class="players">
-        <div class="player-card" id="Sai-card">
-          <h2>Sai <span id="sai-strike" class="strike-indicator"></span></h2>
-          <div class="stat">
-            <span>Runs:</span><span id="sai-runs">0</span>
-          </div>
-          <div class="stat">
-            <span>Status:</span><span id="sai-status">Not Out</span>
-          </div>
-        </div>
+  <div class="scoreboard">
+    <h2>Team Score: <span id="teamScore">0/0</span></h2>
+    <p>Overs: <span id="overs">0.0</span></p>
+    <p>Bowler: <span id="bowlerName">-</span></p>
+  </div>
 
-        <div class="player-card" id="manish-card">
-          <h2>Manish <span id="manish-strike" class="strike-indicator"></span></h2>
-          <div class="stat">
-            <span>Runs:</span><span id="manish-runs">0</span>
-          </div>
-          <div class="stat">
-            <span>Status:</span><span id="manish-status">Not Out</span>
-          </div>
-        </div>
-      </section>
+  <div class="players">
+    <div class="player" id="strikerCard">
+      <h3 id="strikerName">Sai *</h3>
+      <p>Runs: <span id="strikerRuns">0</span></p>
+      <p>Status: <span id="strikerStatus">Not Out</span></p>
+    </div>
+    <div class="player" id="nonStrikerCard">
+      <h3 id="nonStrikerName">Manish</h3>
+      <p>Runs: <span id="nonStrikerRuns">0</span></p>
+      <p>Status: <span id="nonStrikerStatus">Not Out</span></p>
+    </div>
+  </div>
 
-      <section class="controls">
-        <h3>Events</h3>
-        <div class="grid">
-          <button class="btn" data-run="1">1 Run</button>
-          <button class="btn" data-run="2">2 Runs</button>
-          <button class="btn" data-run="3">3 Runs</button>
-          <button class="btn" data-run="4">Four</button>
-          <button class="btn" data-run="6">Six</button>
-          <button class="btn danger" id="wicket">Wicket</button>
-          <button class="btn danger" id="lbw">LBW</button>
-          <button class="btn" id="wide">Wide</button>
-          <button class="btn" id="bye">Bye</button>
-          <button class="btn" id="leg-bye">Leg Bye</button>
-          <button class="btn" id="no-ball">No Ball</button>
-          <button class="btn special" id="free-hit">Free Hit</button>
-        </div>
+  <div class="controls">
+    <button onclick="addRun(1)">1 Run</button>
+    <button onclick="addRun(2)">2 Runs</button>
+    <button onclick="addRun(3)">3 Runs</button>
+    <button onclick="addRun(4)">Four</button>
+    <button onclick="addRun(6)">Six</button>
+    <button onclick="wicket()">Wicket</button>
+    <button onclick="wide()">Wide</button>
+    <button onclick="noBall()">No Ball</button>
+    <button onclick="resetGame()">Reset</button>
+  </div>
 
-        <div class="toolbar">
-          <button class="btn outline" id="switch-striker">Switch Striker</button>
-          <button class="btn outline" id="reset">Reset</button>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <small>Assignment: Cricket Scoreboard Web Application</small>
-    </footer>
-
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>
