@@ -11,8 +11,13 @@ let nextBatsmanIndex = 2;
 let currentBowler = "-";
 
 function updateBowler() {
+  // bowler cannot be one of the current batting pair
   let available = players.filter(p => !batsmen.some(b => b.name === p && !b.out));
-  currentBowler = available[Math.floor(Math.random() * available.length)];
+  if (available.length > 0) {
+    currentBowler = available[Math.floor(Math.random() * available.length)];
+  } else {
+    currentBowler = "-";
+  }
 }
 
 function updateUI() {
@@ -23,13 +28,17 @@ function updateUI() {
   let striker = batsmen.find(b => b.striker);
   let nonStriker = batsmen.find(b => !b.striker);
 
-  document.getElementById("strikerName").textContent = striker.name + " *";
-  document.getElementById("strikerRuns").textContent = striker.runs;
-  document.getElementById("strikerStatus").textContent = striker.out ? "Out" : "Not Out";
+  if (striker) {
+    document.getElementById("strikerName").textContent = striker.name + (striker.out ? "" : " *");
+    document.getElementById("strikerRuns").textContent = striker.runs;
+    document.getElementById("strikerStatus").textContent = striker.out ? "Out" : "Not Out";
+  }
 
-  document.getElementById("nonStrikerName").textContent = nonStriker.name;
-  document.getElementById("nonStrikerRuns").textContent = nonStriker.runs;
-  document.getElementById("nonStrikerStatus").textContent = nonStriker.out ? "Out" : "Not Out";
+  if (nonStriker) {
+    document.getElementById("nonStrikerName").textContent = nonStriker.name;
+    document.getElementById("nonStrikerRuns").textContent = nonStriker.runs;
+    document.getElementById("nonStrikerStatus").textContent = nonStriker.out ? "Out" : "Not Out";
+  }
 }
 
 function switchStrike() {
@@ -42,7 +51,10 @@ function addRun(runs) {
   teamRuns += runs;
   balls++;
   if (runs % 2 === 1) switchStrike();
-  if (balls % 6 === 0) updateBowler(); // change bowler every over
+  if (balls % 6 === 0) {
+    switchStrike(); // strike rotates at end of over
+    updateBowler();
+  }
   updateUI();
 }
 
@@ -51,14 +63,21 @@ function wicket() {
   striker.out = true;
   teamWkts++;
   balls++;
+
   if (nextBatsmanIndex < players.length) {
-    batsmen = [
-      striker,
-      { name: players[nextBatsmanIndex], runs: 0, out: false, striker: true }
-    ];
-    nextBatsmanIndex++;
+    // bring in next batsman to replace the striker
+    batsmen = batsmen.map(b => 
+      b.striker && b.out 
+        ? { name: players[nextBatsmanIndex++], runs: 0, out: false, striker: true } 
+        : b
+    );
   }
-  if (balls % 6 === 0) updateBowler();
+
+  if (balls % 6 === 0) {
+    switchStrike(); // strike changes at end of over
+    updateBowler();
+  }
+
   updateUI();
 }
 
@@ -69,7 +88,8 @@ function wide() {
 
 function noBall() {
   teamRuns++;
-  batsmen.find(b => b.striker).runs++;
+  let striker = batsmen.find(b => b.striker);
+  striker.runs++;
   updateUI();
 }
 
@@ -84,5 +104,6 @@ function resetGame() {
   updateUI();
 }
 
+// start game
 updateBowler();
 updateUI();
